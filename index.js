@@ -1,12 +1,35 @@
-const filter = document.getElementById("filter");
-filter.addEventListener("keyup", function (event) {
-const textEntered = event.target.value.toLowerCase();
-const fruitItems = document.getElementsByClassName("fruit"); for (let i = 0; i < fruitItems.length; i++) {
-const currentFruitText = fruitItems[i].firstChild.textContent.toLowerCase();
-if (currentFruitText.indexOf(textEntered) === -1) {
-fruitItems[i].style.display = "none";
-} else {
-fruitItems[i].style.display = "flex";
-}
-}
-});
+function handleFormSubmit(event) {
+    event.preventDefault();
+    const name = event.target.username.value;
+    const email = event.target.email.value;
+    const phonenumber = event.target.phone.value;
+  
+    const obj = {
+      name,
+      email,
+      phonenumber
+    };
+  
+    localStorage.setItem(obj.email, JSON.stringify(obj));
+    showUserOnScreen(obj);
+  }
+  
+  function showUserOnScreen(obj) {
+    const parentElem = document.getElementById('listOfitems');
+
+    const childElem = document.createElement('li');
+
+    childElem.textContent = `${obj.name} - ${obj.email} - ${obj.phonenumber} <button onclick="deleteUser('${obj.email}')">Delete</button>`;
+
+    const deleteButton = document.createElement('input')
+    deleteButton.type="button"
+    deleteButton.value="Delete"
+    deleteButton.onclick = () => {
+      localStorage.removeItem(obj.email)
+      parentElem.removeChild(childElem)
+    }
+    childElem.appendChild(deleteButton)
+    parentElem.appendChild(listItem);
+  }
+  
+  
