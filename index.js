@@ -1,14 +1,14 @@
-function buyBike(callback){
+function writeLetter(callback){
   setTimeout(function (){
-      console.log("Bought Royal Enfield Himalayan")
+      console.log("Wrote Letter")
       callback();
   },2000)
 }
 
-function planTrip(){
+function postLetter(){
   setTimeout(function(){
-      console.log("Trip to Ladakh planned")
+      console.log("Letter Posted")
   },1000)
 }
 
-buyBike(planTrip);
+writeLetter(postLetter);
